@@ -4,6 +4,7 @@ import Label from "./Label";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import "../styles/IssueItem.css";
 import Assignee from "./Assignee";
+import TopBar from "./TopBar";
 const IssueItem = ({ item }) => {
   const date=item.created_at.slice(8,10)
   const curDate=new Date();
@@ -18,11 +19,12 @@ const IssueItem = ({ item }) => {
         flexDirection: "column",
         width: "80vw",
         marginLeft: "150px",
-        border: "0.1px solid #cfcfcf",
+        border: "0.1px solid #f5f5f5",
         padding: "10px",
         
       }}
     >
+
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div className="util-1">
           <div style={{ display: "flex", justifyContent: "center" }}>
