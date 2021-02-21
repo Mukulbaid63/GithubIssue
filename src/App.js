@@ -18,11 +18,12 @@ function App() {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = issueList.slice(indexOfFirstPost, indexOfLastPost);
   const fetchIssueList = () => {
-    addClick(true)
+    
     fetch(`https://api.github.com/repos/${userInput}/${repoInput}/issues`)
       .then((response) => response.json())
       .then((result) => {
         setIssueList(result);
+      addClick(true)
       })
       .catch(console.log("error"));
   };
