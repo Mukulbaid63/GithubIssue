@@ -1,0 +1,14 @@
+.util-1{
+    display: flex;
+    
+}
+.util-2:hover{
+    background-color: #ebebeb;
+}
+.util-3{
+    text-decoration: none;
+    color: black;
+}
+*:focus{
+    outline: none;
+}
