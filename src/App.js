@@ -6,16 +6,19 @@ import RepoInput from "./components/RepoInput";
 import IssueItem from "./components/IssueItem";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import Pagination from "./components/Pagination";
+import TopBar from "./components/TopBar";
 function App() {
   const [userInput, setuserinput] = useState("");
   const [repoInput, setRepoinput] = useState("");
   const [issueList, setIssueList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
+  const [postsPerPage] = useState(9);
+  const [click,addClick]=useState(false)
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = issueList.slice(indexOfFirstPost, indexOfLastPost);
   const fetchIssueList = () => {
+    addClick(true)
     fetch(`https://api.github.com/repos/${userInput}/${repoInput}/issues`)
       .then((response) => response.json())
       .then((result) => {
@@ -33,7 +36,7 @@ function App() {
           backgroundColor: "#212121",
           color: "white",
           padding: "15px 5px",
-          marginBottom: "20px",
+         
         }}
       >
         <GitHubIcon style={{ fontSize: "40px", padding: "0px 10px" }} />
@@ -54,6 +57,8 @@ function App() {
           Submit
         </button>
       </div>
+
+      {click?<TopBar length={issueList.length} userInput={userInput} repoInput={repoInput}/>:""}
       {currentPosts.map((item) => (
         <IssueItem item={item} />
       ))}
