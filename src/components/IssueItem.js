@@ -6,12 +6,19 @@ import "../styles/IssueItem.css";
 import Assignee from "./Assignee";
 import TopBar from "./TopBar";
 const IssueItem = ({ item }) => {
-  const date=item.created_at.slice(8,10)
-  const curDate=new Date();
-  const curDay=curDate.getDate();
-  const days=Number(curDay)-Number(date)
-  
+  const date=item.created_at.slice(0,10)
+  const createDate=new Date(date);
+ 
+  const d = new Date();
+  const year=d.getFullYear()
+  const month=d.getMonth()
+  const day=d.getDate()
+  const ans=`${year}-${month}-${day}`
+  const curDate=new Date(ans);
+  const Difference_In_Time = curDate.getTime() - createDate.getTime(); 
 
+// To calculate the no. of days between two dates 
+const Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24))
   return (
     <div className='util-2'
       style={{
@@ -47,7 +54,7 @@ const IssueItem = ({ item }) => {
               <Label labels={labelItem} />
             ))}
           </div>
-          <span style={{color:'#807c7c',paddingTop:'9px',fontSize:'13px'}}>#{item.number} opened {days} days ago by {item.user.login}</span>
+          <span style={{color:'#807c7c',paddingTop:'9px',fontSize:'13px'}}>#{item.number} opened {Difference_In_Days} days ago by {item.user.login}</span>
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
