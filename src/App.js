@@ -7,9 +7,11 @@ import IssueItem from "./components/IssueItem";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import Pagination from "./components/Pagination";
 import TopBar from "./components/TopBar";
+import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
 function App() {
   const [userInput, setuserinput] = useState("");
   const [repoInput, setRepoinput] = useState("");
+  const [Message, setMessage] = useState("");
   const [issueList, setIssueList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(9);
@@ -17,13 +19,22 @@ function App() {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = issueList.slice(indexOfFirstPost, indexOfLastPost);
+  let myStatus
   const fetchIssueList = () => {
-    
     fetch(`https://api.github.com/repos/${userInput}/${repoInput}/issues`)
-      .then((response) => response.json())
+      .then((response) => {
+        myStatus = response.status;
+
+        return response.json()})
       .then((result) => {
+        if(myStatus==200){
         setIssueList(result);
-      addClick(true)
+        addClick(true)
+          setMessage("")
+      }
+          else{
+            setMessage("Oopps!!! Error in the repository or user name")
+          }
       })
       .catch(console.log("error"));
   };
@@ -58,8 +69,9 @@ function App() {
           Submit
         </button>
       </div>
-
-      {click?<TopBar length={issueList.length} userInput={userInput} repoInput={repoInput}/>:""}
+          
+      {click && issueList.length>0?<TopBar length={issueList.length} userInput={userInput} repoInput={repoInput}/>:<p style={{display:'flex',color:'blue',justifyContent:'center',fontWeight:'bold',fontSize:'20px',fontFamily:'monospace'}}><ReportProblemOutlinedIcon/>No Open issues found in the repository.</p>}
+      <span style={{color:'red',fontWeight:'bold',fontSize:'40px',fontFamily:'monospace'}}>{Message}</span>
       {currentPosts.map((item) => (
         <IssueItem item={item} />
       ))}
