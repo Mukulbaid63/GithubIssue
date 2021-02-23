@@ -28,9 +28,9 @@ function App() {
         return response.json()})
       .then((result) => {
         if(myStatus==200){
+          setMessage("")
         setIssueList(result);
         addClick(true)
-       
 
       }
           else{
@@ -70,9 +70,9 @@ function App() {
           Submit
         </button>
       </div>
-          
+                <span style={{color:'red',fontWeight:'bold',fontSize:'40px',fontFamily:'monospace'}}>{Message}</span>
+
       {click==true && issueList.length>0 ?<TopBar length={issueList.length} userInput={userInput} repoInput={repoInput}/>:""}
-      <span style={{color:'red',fontWeight:'bold',fontSize:'40px',fontFamily:'monospace'}}>{Message}</span>
       {currentPosts.map((item) => (
         <IssueItem item={item} />
       ))}
