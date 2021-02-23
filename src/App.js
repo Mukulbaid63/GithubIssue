@@ -30,7 +30,8 @@ function App() {
         if(myStatus==200){
         setIssueList(result);
         addClick(true)
-          setMessage("")
+       
+
       }
           else{
             setMessage("Oopps!!! Error in the repository or user name")
@@ -70,7 +71,7 @@ function App() {
         </button>
       </div>
           
-      {click && issueList.length>0?<TopBar length={issueList.length} userInput={userInput} repoInput={repoInput}/>:<p style={{display:'flex',color:'blue',justifyContent:'center',fontWeight:'bold',fontSize:'20px',fontFamily:'monospace'}}><ReportProblemOutlinedIcon/>No Open issues found in the repository.</p>}
+      {click==true && issueList.length>0 ?<TopBar length={issueList.length} userInput={userInput} repoInput={repoInput}/>:""}
       <span style={{color:'red',fontWeight:'bold',fontSize:'40px',fontFamily:'monospace'}}>{Message}</span>
       {currentPosts.map((item) => (
         <IssueItem item={item} />
