@@ -19,7 +19,7 @@ function App() {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = issueList.slice(indexOfFirstPost, indexOfLastPost);
-  let myStatus
+  const [m,Sm]=useState("Hello! Please enter your Github Username and Repository name")
   const fetchIssueList = () => {
     fetch(`https://api.github.com/repos/${userInput}/${repoInput}/issues`)
       .then((response) => {
@@ -31,6 +31,7 @@ function App() {
           setMessage("")
         setIssueList(result);
         addClick(true)
+        Sm("No Open issues found in the repository.")
 
       }
           else{
@@ -72,8 +73,8 @@ function App() {
       </div>
                 <span style={{color:'red',fontWeight:'bold',fontSize:'40px',fontFamily:'monospace'}}>{Message}</span>
 
-      {click==true && issueList.length>0 ?<TopBar length={issueList.length} userInput={userInput} repoInput={repoInput}/>:""}
-      {currentPosts.map((item) => (
+{click && issueList.length>0?<TopBar length={issueList.length} userInput={userInput} repoInput={repoInput}/>:<p style={{display:'flex',color:'blue',justifyContent:'center',fontWeight:'bold',fontSize:'20px',fontFamily:'monospace'}}>{m}</p>}     
+ {currentPosts.map((item) => (
         <IssueItem item={item} />
       ))}
       
