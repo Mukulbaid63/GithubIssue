@@ -20,6 +20,7 @@ function App() {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = issueList.slice(indexOfFirstPost, indexOfLastPost);
   const [m,Sm]=useState("Hello! Please enter your Github Username and Repository name")
+  let myStatus
   const fetchIssueList = () => {
     fetch(`https://api.github.com/repos/${userInput}/${repoInput}/issues`)
       .then((response) => {
