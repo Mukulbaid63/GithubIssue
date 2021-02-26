@@ -16,9 +16,13 @@ const IssueItem = ({ item }) => {
   const ans=`${year}-${month}-${day}`
   const curDate=new Date(ans);
   const Difference_In_Time = curDate.getTime() - createDate.getTime(); 
-
+  console.log(curDate);
+  console.log(createDate);
+  console.log(Difference_In_Time);
 // To calculate the no. of days between two dates 
-const Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24))
+const Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24));
+    console.log(Difference_In_Days);
+
   return (
     <div className='util-2'
       style={{
