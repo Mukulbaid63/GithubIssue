@@ -11,7 +11,7 @@ const IssueItem = ({ item }) => {
  
   const d = new Date();
   const year=d.getFullYear()
-  const month=d.getMonth()
+  const month=d.getMonth()+1
   const day=d.getDate()
   const ans=`${year}-${month}-${day}`
   const curDate=new Date(ans);
