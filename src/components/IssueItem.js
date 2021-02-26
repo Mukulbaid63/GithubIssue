@@ -8,7 +8,6 @@ import TopBar from "./TopBar";
 const IssueItem = ({ item }) => {
   const date=item.created_at.slice(0,10)
   const createDate=new Date(date);
- 
   const d = new Date();
   const year=d.getFullYear()
   const month=d.getMonth()+1
@@ -16,10 +15,7 @@ const IssueItem = ({ item }) => {
   const ans=`${year}-${month}-${day}`
   const curDate=new Date(ans);
   const Difference_In_Time = curDate.getTime() - createDate.getTime(); 
-  console.log(curDate);
-  console.log(createDate);
-  console.log(Difference_In_Time);
-// To calculate the no. of days between two dates 
+
 const Difference_In_Days = Math.ceil(Difference_In_Time / (1000 * 3600 * 24));
     console.log(Difference_In_Days);
 
